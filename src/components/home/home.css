@@ -1,0 +1,48 @@
+.homeWrapper {}
+
+.categoryWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryTitle {
+    flex: 1 1 auto;
+    margin: 25px 15px 10px;
+}
+
+.movieWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movieBody {
+    margin: 15px;
+    flex: 1 1 auto;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.moviePoster {
+    flex: 0 0 auto;
+}
+
+.favoritesButton {
+    position: absolute;
+    color: skyblue;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+}
+
+.movieTitle {
+    flex-wrap: wrap;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.movieRatingIcon {
+    color: #ffd801;
+}

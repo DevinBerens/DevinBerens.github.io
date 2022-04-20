@@ -1,0 +1,33 @@
+.header {
+    background-color: #5a18c9;
+    position: relative;
+    display: flex;
+    color: #f7f2d4;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.leftNav {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 15px;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    cursor: pointer;
+    color: #f7f2d4;
+    text-decoration: none;
+    flex: 1 1 auto;
+}
+
+.title {
+    flex: 1 1 auto;
+    font-size: 38px;
+}
