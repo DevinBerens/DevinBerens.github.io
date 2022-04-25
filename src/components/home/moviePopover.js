@@ -38,6 +38,46 @@ let MoviePopover = (props) => {
         </div>
         <div className="popoverBody">
           <h2 className="movieTitle">{clickedMovie.title}</h2>
+          <div className="popoverFooter">
+            <button
+              className="footerButton"
+              style={{
+                width: window.innerWidth >= 1000 ? "30%" : "50%",
+              }}
+              onClick={toggleFavorite.bind(this, clickedMovie)}
+            >
+              <FontAwesomeIcon
+                icon={
+                  findIndex(favoriteMovies, (m) => m.id === clickedMovie.id) >
+                  -1
+                    ? solid("heart")
+                    : regular("heart")
+                }
+                className="favoritesHeart"
+              />
+              <div>
+                {findIndex(favoriteMovies, (m) => m.id === clickedMovie.id) > -1
+                  ? "Remove "
+                  : "Add "}
+                Movie
+              </div>
+            </button>
+            <button
+              className="footerButton"
+              style={{
+                width: window.innerWidth >= 1000 ? "30%" : "45%",
+              }}
+            >
+              <a
+                href={`https://www.youtube.com/watch?v=${clickedMovie.trailer.key}`}
+                className="trailerLink"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Watch Trailer
+              </a>
+            </button>
+          </div>
           <div className="ft18">
             <b>Directed by:</b> {clickedMovie.director?.name}
           </div>
@@ -49,50 +89,14 @@ let MoviePopover = (props) => {
             )}
           </div>
           <div className="ft18">
+            <b>Rating:</b> {clickedMovie.vote_average}
+          </div>
+          <div className="ft18">
             <b>Release Date:</b> {clickedMovie.release_date}
           </div>
           <div className="ft18">
             <b>Overview:</b> {clickedMovie.overview}
           </div>
-        </div>
-        <div className="popoverFooter">
-          <button
-            className="footerButton"
-            style={{
-              width: window.innerWidth >= 1000 ? "30%" : "50%",
-            }}
-            onClick={toggleFavorite.bind(this, clickedMovie)}
-          >
-            <FontAwesomeIcon
-              icon={
-                findIndex(favoriteMovies, (m) => m.id === clickedMovie.id) > -1
-                  ? solid("heart")
-                  : regular("heart")
-              }
-              className="favoritesHeart"
-            />
-            <div>
-              {findIndex(favoriteMovies, (m) => m.id === clickedMovie.id) > -1
-                ? "Remove "
-                : "Add "}
-              Movie
-            </div>
-          </button>
-          <button
-            className="footerButton"
-            style={{
-              width: window.innerWidth >= 1000 ? "30%" : "45%",
-            }}
-          >
-            <a
-              href={`https://www.youtube.com/watch?v=${clickedMovie.trailer.key}`}
-              className="trailerLink"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Watch Trailer
-            </a>
-          </button>
         </div>
       </div>
     </div>

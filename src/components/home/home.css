@@ -39,13 +39,14 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .popoverFooter {
     flex: 0 0 auto;
     display: flex;
     justify-content: space-evenly;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
@@ -138,9 +139,5 @@
 
     .popoverBody {
         margin: 25px 15px;
-    }
-
-    .popoverFooter {
-        margin: 0 15px 15px;
     }
 }
