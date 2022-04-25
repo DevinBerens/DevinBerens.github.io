@@ -1,22 +1,61 @@
-import React, { useCallback } from "react";
-import { imagePath } from "../global/utils";
+import React, { useCallback, useState } from "react";
+import { imagePath, moviePath, apiKey } from "../global/utils";
 import "./home.css";
-import { findIndex } from "lodash";
+import { find, findIndex } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
+import MoviePopover from "./moviePopover";
 
 let Home = (props) => {
   const { popularMovies, favoriteMovies, setFavoriteMovies } = props;
+  let [moviePopover, setMoviePopover] = useState(false);
+  let [clickedMovie, setClickedMovie] = useState({});
 
-  console.log(props);
+  let movieClick = useCallback((movie) => {
+    let urls = [
+      `${moviePath}movie/${movie.id}?api_key=${apiKey}&language=en-US`,
+      `${moviePath}movie/${movie.id}/credits?api_key=${apiKey}&language=en-US`,
+      `${moviePath}movie/${movie.id}/videos?api_key=${apiKey}&language=en-US`,
+    ];
+    Promise.all(urls.map((url) => fetch(url)))
+      .then((responses) =>
+        Promise.all(responses.map((response) => response.json()))
+      )
+      .then((data) => {
+        let director = find(data[1].crew, (item) => {
+          return item.job === "Director";
+        });
+        let trailers = [];
+        find(data[2].results, (item) => {
+          if (item.type === "Trailer") {
+            trailers.push(item);
+          }
+        });
+        let movieDetails = {
+          ...data[0],
+          director: director,
+          trailer: trailers[0],
+        };
+        console.log(movieDetails);
+        setMoviePopover(true);
+        setClickedMovie(movieDetails);
+      })
+      .catch((err) => {
+        console.log(err, "error calling backend API");
+      });
+  }, []);
+
+  let closePopover = useCallback(() => {
+    setMoviePopover(false);
+    setClickedMovie({});
+  }, []);
 
   let toggleFavorite = useCallback(
-    (movie) => {
-      console.log(movie, favoriteMovies);
+    (movie, e) => {
+      e.stopPropagation();
       let i = findIndex(favoriteMovies, (m) => {
         return m.id === movie.id;
       });
-      console.log(i);
       localStorage.removeItem("favoriteMovies");
       if (i > -1) {
         let favList = [
@@ -33,6 +72,7 @@ let Home = (props) => {
     },
     [favoriteMovies, setFavoriteMovies]
   );
+
   return (
     <div className="homeWrapper">
       {[
@@ -47,7 +87,11 @@ let Home = (props) => {
                 {category.map(
                   (movie, i) =>
                     i !== 0 && (
-                      <div className="movieBody" key={i}>
+                      <div
+                        className="movieBody"
+                        onClick={movieClick.bind(this, movie)}
+                        key={i}
+                      >
                         <img
                           className="moviePoster"
                           src={`${imagePath}${movie.poster_path}`}
@@ -79,6 +123,14 @@ let Home = (props) => {
               </div>
             </div>
           )
+      )}
+      {moviePopover && (
+        <MoviePopover
+          closePopover={closePopover}
+          clickedMovie={clickedMovie}
+          toggleFavorite={toggleFavorite}
+          favoriteMovies={favoriteMovies}
+        />
       )}
     </div>
   );

@@ -16,7 +16,6 @@ function App() {
     let myFavoriteMovies = localStorage.getItem("favoriteMovies");
     myPopularMovies = JSON.parse(myPopularMovies);
     myFavoriteMovies = JSON.parse(myFavoriteMovies);
-    console.log(myFavoriteMovies, myPopularMovies);
     (myFavoriteMovies || []).length && setFavoriteMovies(myFavoriteMovies);
     (myPopularMovies || []).length && setPopularMovies(myPopularMovies);
     if (!(myPopularMovies || []).length) {
