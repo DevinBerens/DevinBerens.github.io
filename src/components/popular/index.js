@@ -1,16 +1,15 @@
 import React from "react";
-import { imagePath } from "../global/utils";
-import { findIndex } from "lodash";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
-import MoviePopover from "./moviePopover";
 import NavBar from "../navBar";
+import { imagePath } from "../global/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { findIndex } from "lodash";
+import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import MoviePopover from "../home/moviePopover";
 
-let Home = (props) => {
+let Popular = (props) => {
   const {
     popularMovies,
     favoriteMovies,
-    upcomingMovies,
     movieClick,
     moviePopover,
     clickedMovie,
@@ -19,13 +18,9 @@ let Home = (props) => {
   } = props;
 
   return (
-    <div className="homeWrapper">
+    <div className="popularWrapper">
       <NavBar movieClick={movieClick} />
-      {[
-        ["Favorite Movies", ...(favoriteMovies || [])],
-        ["Popular Movies", ...(popularMovies || [])],
-        ["Upcoming Movies", ...(upcomingMovies || [])],
-      ].map((category, index) => (
+      {[["Popular Movies", ...(popularMovies || [])]].map((category, index) => (
         <div className="categoryWrapper" key={index}>
           <h2 className="categoryTitle">{category[0]}</h2>
           {category?.length > 1 ? (
@@ -82,4 +77,4 @@ let Home = (props) => {
   );
 };
 
-export default Home;
+export default Popular;

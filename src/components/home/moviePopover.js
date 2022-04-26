@@ -69,7 +69,7 @@ let MoviePopover = (props) => {
               }}
             >
               <a
-                href={`https://www.youtube.com/watch?v=${clickedMovie.trailer.key}`}
+                href={`https://www.youtube.com/watch?v=${clickedMovie.trailer?.key}`}
                 className="trailerLink"
                 target="_blank"
                 rel="noreferrer"
