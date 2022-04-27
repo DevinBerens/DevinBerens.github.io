@@ -223,6 +223,13 @@ code {
   margin-top: 15px;
 }
 
+.showMore {
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: 100px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 999px) {
   .popoverWrapper {
     padding: 0;

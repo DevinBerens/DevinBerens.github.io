@@ -15,6 +15,7 @@ let Popular = (props) => {
     clickedMovie,
     toggleFavorite,
     closePopover,
+    showMore,
   } = props;
 
   return (
@@ -59,6 +60,12 @@ let Popular = (props) => {
                     </div>
                   )
               )}
+              <div
+                onClick={showMore.bind(this, category[0])}
+                className="showMore"
+              >
+                Show More...
+              </div>
             </div>
           ) : (
             <div className="noneFound">No movies found</div>

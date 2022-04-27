@@ -101,6 +101,41 @@ function App() {
       });
   }, []);
 
+  let showMore = useCallback(
+    (title) => {
+      let category = title.split(" ")[0].toLowerCase();
+      let page = 2;
+      if (category === "popular") {
+        page = popularMovies.length / 20 + 1;
+      } else if (category === "upcoming") {
+        page = upcomingMovies.length / 20 + 1;
+      }
+      fetch(
+        `${moviePath}movie/${category}?api_key=${apiKey}&language=en-US&page=${page}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (category === "popular") {
+            localStorage.removeItem("popularMovies");
+            localStorage.setItem(
+              "popularMovies",
+              JSON.stringify([...popularMovies, ...data.results])
+            );
+            setPopularMovies([...popularMovies, ...data.results]);
+          } else if (category === "upcoming") {
+            localStorage.removeItem("upcomingMovies");
+            localStorage.setItem(
+              "upcomingMovies",
+              JSON.stringify([...upcomingMovies, ...data.results])
+            );
+            setUpcomingMovies([...upcomingMovies, ...data.results]);
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [popularMovies, upcomingMovies]
+  );
+
   useEffect(() => {
     let myPopularMovies = localStorage.getItem("popularMovies");
     let myFavoriteMovies = localStorage.getItem("favoriteMovies");
@@ -133,6 +168,7 @@ function App() {
               clickedMovie={clickedMovie}
               toggleFavorite={toggleFavorite}
               closePopover={closePopover}
+              showMore={showMore}
             />
           }
         />
@@ -162,6 +198,7 @@ function App() {
               clickedMovie={clickedMovie}
               toggleFavorite={toggleFavorite}
               closePopover={closePopover}
+              showMore={showMore}
             />
           }
         />
@@ -177,6 +214,7 @@ function App() {
               clickedMovie={clickedMovie}
               toggleFavorite={toggleFavorite}
               closePopover={closePopover}
+              showMore={showMore}
             />
           }
         />

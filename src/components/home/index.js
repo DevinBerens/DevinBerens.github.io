@@ -16,6 +16,7 @@ let Home = (props) => {
     clickedMovie,
     toggleFavorite,
     closePopover,
+    showMore,
   } = props;
 
   return (
@@ -63,6 +64,14 @@ let Home = (props) => {
                       </div>
                     </div>
                   )
+              )}
+              {category[0] !== "Favorite Movies" && (
+                <div
+                  onClick={showMore.bind(this, category[0])}
+                  className="showMore"
+                >
+                  Show More...
+                </div>
               )}
             </div>
           ) : (
