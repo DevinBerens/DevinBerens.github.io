@@ -6,6 +6,6 @@ This is a movie site that gets movies from a database and shows them on the site
 
 ## The website:
 
-https://devinberens.github.io/
+https://devinberens.github.io/#/
 
 # I hope you enjoy the site!
