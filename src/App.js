@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 import Header from "./components/header";
 import "./App.css";
@@ -154,7 +154,7 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
+      <HashRouter basename="/">
         <Route
           path="/"
           exact={true}
@@ -218,7 +218,7 @@ function App() {
             />
           }
         />
-      </Routes>
+      </HashRouter>
     </>
   );
 }
